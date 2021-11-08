@@ -1,3 +1,8 @@
 # ula-tech-test #
-#on branch Master
-tech test QA using cypress
+### On branch Master
+
+# 1. Web Application#
+* Using Cypress
+
+# 2.API Test #
+* Cypress Cypress
