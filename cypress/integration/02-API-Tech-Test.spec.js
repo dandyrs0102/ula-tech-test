@@ -1,5 +1,5 @@
 describe('API Technical Test', () => {
-	it('verify GET response single product', () => {
+	it('GET - response single product', () => {
 		cy
 			.request({
 				method: 'GET',
@@ -26,6 +26,11 @@ describe('API Technical Test', () => {
 	})
 
 	it('POST - add new product', () => {
+		let titleReq = 'Test post product'
+		var priceReq = 50.5
+		let descReq = 'Quick brown fox'
+		let imageReq = 'http://example.com'
+		let categoryReq = 'Example'
 
 		cy
 			.request({
@@ -34,19 +39,24 @@ describe('API Technical Test', () => {
 				headers: {
 					connection: 'keep-alive',
 				},
-				body: JSON.stringify({
-					"title": "test product POST",
-					"price": 35.5,
-					"description": "quick brown fox",
-					"image": "http://example.com/",
-					"category": "example"
-				}),
+				body: {
+					"title": titleReq,
+					"price": priceReq,
+					"description": descReq,
+					"image": imageReq,
+					"category": categoryReq
+				}
 			})
 			.then((res) => {
 				cy.log(JSON.stringify(res))
 				expect(res.status).to.eq(200)
 				expect(res.body).has.property('_id')
 				expect(res.body).has.property('id', 21)
+				expect(res.body).has.property('title', titleReq)
+				expect(res.body).has.property('price', priceReq)
+				expect(res.body).has.property('description', descReq)
+				expect(res.body).has.property('image', imageReq)
+				expect(res.body).has.property('category', categoryReq)
 				
 			
 			})
